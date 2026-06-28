@@ -199,7 +199,8 @@ Design inspiration from modern UI trends
 Background gradients from uiGradients
 
 📞 Contact
-Your Name - @YOUR_TWITTER - email@example.com
+Laxmipriya Rout
+routlaxmipriya121@gmail.com
 
 Project Link: https://github.com/YOUR_USERNAME/task-manager-ui
 
