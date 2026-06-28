@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Task Manager</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📋 TaskFlow</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <span>📝</span> Tasks
+                </a>
+                <a href="#" class="nav-item">
+                    <span>📅</span> Calendar
+                </a>
+                <a href="#" class="nav-item">
+                    <span>👥</span> Team
+                </a>
+                <a href="#" class="nav-item">
+                    <span>⚙️</span> Settings
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">JD</div>
+                    <div>
+                        <p class="user-name">John Doe</p>
+                        <p class="user-email">john@example.com</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">🚪 Logout</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="greeting">Good morning, John! 👋</p>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn-primary" onclick="showTaskForm()">+ New Task</button>
+                    <div class="notification-bell" onclick="toggleNotifications()">
+                        🔔
+                        <span class="badge">3</span>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-item">
+                                <span>✅</span>
+                                <div>
+                                    <p>Task "Project Report" completed</p>
+                                    <small>2 min ago</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <span>📌</span>
+                                <div>
+                                    <p>New task assigned to you</p>
+                                    <small>15 min ago</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <span>⚠️</span>
+                                <div>
+                                    <p>Task "Review Code" is overdue</p>
+                                    <small>1 hour ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-avatar">👤</div>
+                </div>
+            </header>
+            
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📌</div>
+                    <div class="stat-info">
+                        <h3>Total Tasks</h3>
+                        <p class="stat-number">24</p>
+                        <span class="stat-change">↑ 12%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3>Completed</h3>
+                        <p class="stat-number">12</p>
+                        <span class="stat-change">↑ 8%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-info">
+                        <h3>In Progress</h3>
+                        <p class="stat-number">8</p>
+                        <span class="stat-change">→ 0%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <h3>Overdue</h3>
+                        <p class="stat-number">4</p>
+                        <span class="stat-change danger">↑ 3%</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="quick-action-btn" onclick="showTaskForm()">
+                    <span>📝</span>
+                    <span>Create Task</span>
+                </button>
+                <button class="quick-action-btn">
+                    <span>📊</span>
+                    <span>View Reports</span>
+                </button>
+                <button class="quick-action-btn">
+                    <span>👥</span>
+                    <span>Team Chat</span>
+                </button>
+                <button class="quick-action-btn">
+                    <span>📅</span>
+                    <span>Calendar</span>
+                </button>
+            </div>
+            
+            <!-- Today's Progress -->
+            <div class="today-progress">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3>Today's Progress</h3>
+                        <span class="progress-percentage">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>✅ 6 tasks done</span>
+                        <span>⏳ 2 remaining</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Task Section -->
+            <section class="task-section">
+                <div class="section-header">
+                    <h2>Recent Tasks</h2>
+                    <a href="#" class="view-all">View All →</a>
+                </div>
+                
+                <div class="task-list">
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox" onclick="toggleTask(this)">
+                        <div class="task-content">
+                            <h4>Complete project report</h4>
+                            <p>📅 Due: Dec 28, 2026</p>
+                            <span class="task-tag">📁 Project</span>
+                        </div>
+                        <span class="task-priority high">High</span>
+                        <button class="task-action" onclick="deleteTask(this)">✕</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox" onclick="toggleTask(this)">
+                        <div class="task-content">
+                            <h4>Review pull requests</h4>
+                            <p>📅 Due: Dec 29, 2026</p>
+                            <span class="task-tag">🔍 Review</span>
+                        </div>
+                        <span class="task-priority medium">Medium</span>
+                        <button class="task-action" onclick="deleteTask(this)">✕</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox" onclick="toggleTask(this)">
+                        <div class="task-content">
+                            <h4>Update documentation</h4>
+                            <p>📅 Due: Dec 30, 2026</p>
+                            <span class="task-tag">📝 Docs</span>
+                        </div>
+                        <span class="task-priority low">Low</span>
+                        <button class="task-action" onclick="deleteTask(this)">✕</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox" onclick="toggleTask(this)">
+                        <div class="task-content">
+                            <h4>Design UI mockups</h4>
+                            <p>📅 Due: Dec 31, 2026</p>
+                            <span class="task-tag">🎨 Design</span>
+                        </div>
+                        <span class="task-priority high">High</span>
+                        <button class="task-action" onclick="deleteTask(this)">✕</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Task Form Modal -->
+    <div id="taskFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTaskForm()">&times;</span>
+            <h2>✨ Create New Task</h2>
+            <form id="taskForm" onsubmit="handleTaskSubmit(event)">
+                <div class="form-group">
+                    <label>Task Title</label>
+                    <input type="text" placeholder="Enter task title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="3" placeholder="Describe your task..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select>
+                            <option>Low</option>
+                            <option selected>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Due Date</label>
+                        <input type="date">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeTaskForm()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+    
+    <script>
+        // Show toast message
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        // Toggle task completion
+        function toggleTask(checkbox) {
+            const item = checkbox.closest('.task-item');
+            if (checkbox.checked) {
+                item.classList.add('completed');
+                showToast('✅ Task completed!');
+            } else {
+                item.classList.remove('completed');
+            }
+        }
+        
+        // Delete task
+        function deleteTask(btn) {
+            const item = btn.closest('.task-item');
+            item.style.transform = 'translateX(100%)';
+            item.style.opacity = '0';
+            setTimeout(() => {
+                item.style.display = 'none';
+                showToast('🗑️ Task deleted');
+            }, 300);
+        }
+        
+        // Toggle notifications
+        function toggleNotifications() {
+            document.getElementById('notificationDropdown').classList.toggle('show');
+        }
+        
+        // Close notifications on outside click
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('notificationDropdown');
+            const bell = document.querySelector('.notification-bell');
+            if (!bell.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+        
+        // Show task form
+        function showTaskForm() {
+            document.getElementById('taskFormModal').style.display = 'block';
+        }
+        
+        function closeTaskForm() {
+            document.getElementById('taskFormModal').style.display = 'none';
+        }
+        
+        // Handle task submit
+        function handleTaskSubmit(event) {
+            event.preventDefault();
+            showToast('✅ Task created successfully!');
+            closeTaskForm();
+        }
+        
+        // Handle logout
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                showToast('👋 Logging out...');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            }
+        }
+        
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('taskFormModal');
+            if (event.target === modal) {
+                closeTaskForm();
+            }
+        }
+    </script>
+</body>
+</html>
