@@ -232,7 +232,4 @@ Export/Import tasks
 
 Mobile app (React Native)
 
-🐛 Known Issues
-None currently - please report any issues!
 
-## 📂 Project Structure
